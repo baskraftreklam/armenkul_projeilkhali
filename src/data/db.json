@@ -1,0 +1,57 @@
+{
+  "properties": [
+    {
+      "id": 1,
+      "title": "Atakum Sahilde Lüks 3+1 Fırsatı",
+      "videoUrl": "https://videos.pexels.com/video-files/2883391/2883391-hd_1280_720_25fps.mp4",
+      "location": { "lat": 41.3553, "lng": 36.2629 },
+      "ownerName": "Ahmet Yılmaz",
+      "ownerPhone": "0555 123 45 67",
+      "address": "Atakum, Adnan Menderes Blv. No: 55, Samsun",
+      "neighborhood": "Mimar Sinan",
+      "roomCount": "3+1",
+      "squareMeters": 150,
+      "price": 3500000,
+      "loanAmount": 2000000,
+      "bathroomCount": 2,
+      "ensuiteBathroom": true,
+      "buildingAge": 5,
+      "totalFloors": 12,
+      "floor": 7,
+      "occupancyStatus": "Boş",
+      "kitchenType": "Kapalı Mutfak",
+      "features": "Deniz manzaralı, Ebeveyn banyolu, Kapalı otopark, Güvenlikli site, Ankastre mutfak",
+      "images": [
+        "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg",
+        "https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg",
+        "https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Atakent'te Geniş 2+1 Arakat",
+      "videoUrl": "",
+      "location": { "lat": 41.3658, "lng": 36.2421 },
+      "ownerName": "Zeynep Kaya",
+      "ownerPhone": "0544 987 65 43",
+      "address": "Atakum, Cumhuriyet Cd. No: 12, Samsun",
+      "neighborhood": "Atakent",
+      "roomCount": "2+1",
+      "squareMeters": 110,
+      "price": 2250000,
+      "loanAmount": 1250000,
+      "bathroomCount": 1,
+      "ensuiteBathroom": false,
+      "buildingAge": 12,
+      "totalFloors": 8,
+      "floor": 3,
+      "occupancyStatus": "Kiracılı",
+      "kitchenType": "Kapalı Mutfak",
+      "features": "Merkezi konum, Toplu taşımaya yakın, Çelik kapı, Asansörlü",
+      "images": [
+        "https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg",
+        "https://images.pexels.com/photos/276724/pexels-photo-276724.jpeg"
+      ]
+    }
+  ]
+}
