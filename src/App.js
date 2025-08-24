@@ -6,6 +6,7 @@ import PortfolioDetail from './pages/PortfolioDetail';
 import AddPortfolio from './pages/AddPortfolio';
 import LoginPage from './pages/LoginPage';
 import ProtectedRoute from './components/ProtectedRoute';
+import RequestForm from './pages/RequestForm'; // Yeni sayfayı import et
 import { AuthProvider } from './context/AuthContext';
 import mockData from './data/db.json';
 import './utils/fixLeafletIcon';
@@ -21,35 +22,18 @@ function App() {
   };
 
   const handleUpdatePortfolio = (updatedPortfolio) => {
-    // Gelen resimler string ise diziye çevir, değilse dokunma
     const imagesAsArray = typeof updatedPortfolio.images === 'string'
       ? (updatedPortfolio.images || '').split(',').map(img => img.trim()).filter(img => img)
       : updatedPortfolio.images;
-
-    const portfolioToUpdate = {
-      ...updatedPortfolio,
-      images: imagesAsArray
-    };
-
-    setProperties(prevProperties => 
-      prevProperties.map(p => 
-        p.id === portfolioToUpdate.id ? portfolioToUpdate : p
-      )
-    );
+    const portfolioToUpdate = { ...updatedPortfolio, id: parseInt(updatedPortfolio.id), images: imagesAsArray };
+    setProperties(prevProperties => prevProperties.map(p => p.id === portfolioToUpdate.id ? portfolioToUpdate : p));
   };
 
   const handleAddPortfolio = (newPortfolio) => {
-    const imagesAsArray = (newPortfolio.images || '')
-      .split(',')
-      .map(img => img.trim())
-      .filter(img => img);
-
-    const portfolioWithId = {
-      ...newPortfolio,
-      id: Date.now(),
-      images: imagesAsArray,
-    };
-    
+    const imagesAsArray = typeof newPortfolio.images === 'string'
+      ? (newPortfolio.images || '').split(',').map(img => img.trim()).filter(img => img)
+      : newPortfolio.images;
+    const portfolioWithId = { ...newPortfolio, id: Date.now(), images: imagesAsArray };
     setProperties([portfolioWithId, ...properties]);
   };
 
@@ -61,6 +45,10 @@ function App() {
           <Routes>
             <Route path="/" element={<PortfolioList properties={properties} onDeletePortfolio={handleDeletePortfolio} />} />
             <Route path="/portfolio/:id" element={<PortfolioDetail properties={properties} onDeletePortfolio={handleDeletePortfolio} />} />
+            
+            {/* --- YENİ ROTA EKLENDİ --- */}
+            <Route path="/talep-et" element={<RequestForm />} />
+
             <Route path="/admin/login" element={<LoginPage />} />
             <Route 
               path="/add" 

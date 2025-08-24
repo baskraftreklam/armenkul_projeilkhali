@@ -2,22 +2,25 @@
 @import "leaflet/dist/leaflet.css";
 
 :root {
-  /* KOYU MOD DEĞİŞKENLERİ ARTIK VARSAYILAN OLDU */
-  --primary-color: #EF4444;
-  --primary-hover-color: #F87171;
+  /* --- DEĞİŞİKLİK BURADA: Kırmızı renk kodu güncellendi --- */
+  --primary-color: #ff0000; /* Ana Kırmızı Renk */
+  --primary-hover-color: #e60000; /* Kırmızı üzerine gelince daha koyu ton */
+  
   --background-color: linear-gradient(rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.7)), url('./assets/dark-background.jpg');
   --text-color: #e9ecef;
   --text-secondary-color: #adb5bd;
   --box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 
-  /* --- DEĞİŞİKLİK BURADA: YENİ RENK VE ARTIRILMIŞ SAYDAMLIK --- */
-  /* #07141e renginin RGB karşılığı (7, 20, 30)'dur */
-  --card-bg: rgba(7, 20, 30, 0.8); /* Saydamlık %80'e çıkarıldı */
-  --header-bg: rgba(7, 20, 30, 0.8); /* Header için de aynı saydamlık */
+  --card-bg: rgba(7, 20, 30, 0.8);
+  --header-bg: rgba(7, 20, 30, 0.8);
   --border-color: rgba(255, 255, 255, 0.18);
 
   --input-bg: #2d3748;
   --input-border: #4a5568;
+
+  /* Detay sayfasındaki etiketler için renkler */
+  --success-color: #28a745;
+  --info-color: #007bff;
 }
 
 body {
