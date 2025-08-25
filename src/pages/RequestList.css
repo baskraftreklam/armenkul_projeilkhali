@@ -1,0 +1,55 @@
+.request-list-container {
+    padding: 30px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--box-shadow);
+    border-radius: 10px;
+}
+.request-section {
+    margin-bottom: 40px;
+}
+.request-list-container h1, .request-list-container h2 {
+    color: var(--primary-color);
+    margin-top: 0;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+}
+.request-list-container h2 {
+    color: var(--text-secondary-color);
+}
+.no-requests {
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--text-secondary-color);
+    padding: 50px 0;
+}
+.requests-table-container { overflow-x: auto; }
+.requests-table { width: 100%; border-collapse: collapse; }
+.requests-table th, .requests-table td { padding: 12px 15px; text-align: left; border-bottom: 1px solid var(--border-color); }
+.requests-table th { background-color: rgba(0,0,0,0.2); font-weight: 600; }
+.requests-table tr:last-child td { border-bottom: none; }
+.completed-table { opacity: 0.7; }
+.status-select { padding: 8px; border: 1px solid var(--input-border); border-radius: 5px; background-color: var(--input-bg); color: var(--text-color); font-weight: 500; }
+.status-yeni { background-color: #007bff; color: white; }
+.status-arandı { background-color: #ffc107; color: black; }
+.status-randevu-oluşturuldu { background-color: #17a2b8; color: white; }
+.status-sonuçlandı { background-color: #28a745; color: white; }
+.status-i̇ptal { background-color: #6c757d; color: white; }
+
+/* İşlem Butonları */
+.action-buttons { display: flex; gap: 10px; }
+.action-buttons button { padding: 6px 12px; border: none; border-radius: 5px; cursor: pointer; font-weight: 500; transition: all 0.2s ease; }
+.btn-details { background-color: #3B82F6; color: white; }
+.btn-details:hover { background-color: #2563EB; }
+.btn-delete { background-color: transparent; border: 1px solid var(--primary-color); color: var(--primary-color); }
+.btn-delete:hover { background-color: var(--primary-color); color: white; }
+
+/* Detay Modal Stilleri */
+.modal-backdrop { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(5px); }
+.modal-content { background: var(--card-bg); padding: 30px; border-radius: 10px; border: 1px solid var(--border-color); width: 90%; max-width: 600px; }
+.modal-content h2 { margin-top: 0; color: var(--primary-color); }
+.modal-details { margin: 20px 0; }
+.modal-details p { margin: 10px 0; padding-bottom: 10px; border-bottom: 1px dotted var(--border-color); display: flex; justify-content: space-between; }
+.modal-details p:last-child { border-bottom: none; }
+.modal-details strong { color: var(--text-secondary-color); }
+.modal-close-btn { display: block; width: 100%; padding: 12px; background-color: var(--primary-color); color: white; border: none; border-radius: 5px; font-size: 1rem; font-weight: bold; cursor: pointer; margin-top: 20px; }

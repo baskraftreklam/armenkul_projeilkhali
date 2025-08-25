@@ -3,6 +3,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import PortfolioCard from '../components/PortfolioCard';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
+import { useAuth } from '../context/AuthContext';
+import { turkishCities } from '../data/cities';
 import './PortfolioList.css';
 
 const ChevronLeftIcon = () => (
@@ -18,13 +20,14 @@ atakumNeighborhoods.sort();
 function PortfolioList({ properties, onDeletePortfolio }) {
   const location = useLocation();
   const navigate = useNavigate();
+  const { currentUser } = useAuth();
   const [isFiltersOpen, setIsFiltersOpen] = useState(window.innerWidth > 992);
 
-  // Dinamik maksimum değerler için
   const maxPrice = useMemo(() => properties.length ? Math.max(...properties.map(p => p.price)) : 10000000, [properties]);
   const maxSquareMeters = useMemo(() => properties.length ? Math.max(...properties.map(p => p.squareMeters)) : 500, [properties]);
 
   const initialFilters = {
+    city: currentUser?.city || 'Tümü',
     listingStatus: 'Tümü',
     propertyType: 'Tümü',
     neighborhood: '',
@@ -42,30 +45,26 @@ function PortfolioList({ properties, onDeletePortfolio }) {
   const [hasFiltered, setHasFiltered] = useState(false);
   
   useEffect(() => {
-    if (location.state?.neighborhood) {
-      setIsFiltersOpen(true);
-      handleFilterChange('neighborhood', location.state.neighborhood);
-      navigate(location.pathname, { replace: true, state: {} });
+    if (currentUser?.city && !hasFiltered) {
+      setFilters(prev => ({...prev, city: currentUser.city}));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location, navigate]);
-  
-  // Slider'ların max değerlerini güncelle
-  useEffect(() => { setFilters(f => ({...f, priceRange: [f.priceRange[0], maxPrice]})); }, [maxPrice]);
-  useEffect(() => { setFilters(f => ({...f, squareMetersRange: [f.squareMetersRange[0], maxSquareMeters]})); }, [maxSquareMeters]);
-  
+  }, [currentUser, hasFiltered]);
+
   const handleFilterChange = (name, value) => {
     setFilters(prevFilters => ({ ...prevFilters, [name]: value }));
     setHasFiltered(true);
   };
 
   const resetFilters = () => {
-    setFilters({...initialFilters, priceRange: [0, maxPrice], squareMetersRange: [0, maxSquareMeters]});
+    setFilters({...initialFilters, priceRange: [0, maxPrice], squareMetersRange: [0, maxSquareMeters], city: currentUser?.city || 'Tümü'});
     setHasFiltered(false);
   };
 
   const filteredProperties = properties.filter(p => {
+    const cityMatch = filters.city === 'Tümü' || p.city === filters.city;
+
     return (
+      cityMatch &&
       (filters.listingStatus === 'Tümü' || p.listingStatus === filters.listingStatus) &&
       (filters.propertyType === 'Tümü' || p.propertyType === filters.propertyType) &&
       (p.price >= filters.priceRange[0] && p.price <= filters.priceRange[1]) &&
@@ -90,6 +89,15 @@ function PortfolioList({ properties, onDeletePortfolio }) {
               <h2>Detaylı Arama</h2>
               <button onClick={() => setIsFiltersOpen(false)} className="filter-collapse-button" title="Filtreleri Gizle"><ChevronLeftIcon /></button>
            </div>
+            
+            <div className="filter-group">
+                <label>Şehir</label>
+                <select value={filters.city} onChange={e => handleFilterChange('city', e.target.value)}>
+                    <option value="Tümü">Tüm Şehirler</option>
+                    {turkishCities.map(city => <option key={city} value={city}>{city}</option>)}
+                </select>
+            </div>
+
             <div className="filter-buttons">
               <button className={filters.listingStatus === 'Satılık' ? 'active' : ''} onClick={() => handleFilterChange('listingStatus', 'Satılık')}>Satılık</button>
               <button className={filters.listingStatus === 'Kiralık' ? 'active' : ''} onClick={() => handleFilterChange('listingStatus', 'Kiralık')}>Kiralık</button>
@@ -111,7 +119,7 @@ function PortfolioList({ properties, onDeletePortfolio }) {
             <Slider range min={0} max={maxSquareMeters} step={5} value={filters.squareMetersRange} onChange={value => handleFilterChange('squareMetersRange', value)} />
           </div>
           <div className="filter-group">
-             <label htmlFor="neighborhood-filter">Konum (Atakum)</label>
+             <label htmlFor="neighborhood-filter">Mahalle (Sadece Samsun/Atakum)</label>
               <select id="neighborhood-filter" value={filters.neighborhood} onChange={e => handleFilterChange('neighborhood', e.target.value)}>
                   <option value="">Tüm Mahalleler</option>
                   {atakumNeighborhoods.map(hood => <option key={hood} value={hood}>{hood}</option>)}
@@ -153,7 +161,8 @@ function PortfolioList({ properties, onDeletePortfolio }) {
       <button onClick={() => setIsFiltersOpen(true)} className={isFiltersOpen ? 'filter-expand-button is-hidden' : 'filter-expand-button'} title="Filtreleri Göster"><ChevronRightIcon /></button>
       <div className="property-list-container">
         <button onClick={() => setIsFiltersOpen(!isFiltersOpen)} className="mobile-filter-toggle-button">{isFiltersOpen ? 'Filtreleri Gizle' : 'Filtreleri Göster'}</button>
-        {(hasFiltered) && (<div className="list-summary"><strong>{filteredProperties.length}</strong> adet portföy bulundu.</div>)}
+        <h1 className="city-header">{filters.city === 'Tümü' ? 'Tüm Portföyler' : `${filters.city} Portföyleri`}</h1>
+        {(hasFiltered || currentUser) && (<div className="list-summary"><strong>{filteredProperties.length}</strong> adet portföy bulundu.</div>)}
         <div className="property-grid">
             {filteredProperties.length > 0 ? (
              filteredProperties.map(property => (<PortfolioCard key={property.id} property={property} onDeletePortfolio={onDeletePortfolio} />))

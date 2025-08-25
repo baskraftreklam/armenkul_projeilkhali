@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Slider from 'rc-slider';
 import { FaInstagram, FaFacebook, FaWhatsapp } from 'react-icons/fa';
@@ -8,7 +8,7 @@ import './RequestForm.css';
 const atakumNeighborhoods = ["Aksu", "Alanlı", "Atakent", "Balaç", "Beypınar", "Büyükkolpınar", "Cumhuriyet", "Çamlıyazı", "Çatalçam", "Denizevleri", "Elmaçukuru", "Erikli", "Esenevler", "Güzelyalı", "İncesu", "İstiklal", "Karakavuk", "Kamalı", "Kesilli", "Körfez", "Küçükkolpınar", "Mevlana", "Mimar Sinan", "Taflan", "Yeni Mahalle", "Yeşiltepe"];
 atakumNeighborhoods.sort();
 
-function RequestForm() {
+function RequestForm({ onAddRequest }) {
     const navigate = useNavigate();
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [visibleNeighborhoods, setVisibleNeighborhoods] = useState(2);
@@ -27,6 +27,17 @@ function RequestForm() {
         floor: [0, 20],
     });
 
+    // --- DEĞİŞİKLİK BURADA: Satılık/Kiralık durumuna göre bütçe slider'ını sıfırlamak için useEffect eklendi ---
+    useEffect(() => {
+        if (formData.listingStatus === 'Kiralık') {
+            // Eğer Kiralık seçilirse, bütçeyi kiralık aralığına çek
+            setFormData(prev => ({ ...prev, budget: [0, 50000] }));
+        } else {
+            // Eğer Satılık seçilirse, bütçeyi satılık aralığına çek
+            setFormData(prev => ({ ...prev, budget: [500000, 10000000] }));
+        }
+    }, [formData.listingStatus]); // Bu hook sadece listingStatus değiştiğinde çalışır
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
@@ -42,6 +53,7 @@ function RequestForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        onAddRequest(formData);
         console.log('Gönderilen Talep Formu:', formData);
         setIsSubmitted(true);
         window.scrollTo(0, 0);
@@ -70,6 +82,10 @@ function RequestForm() {
         );
     }
 
+    // --- DEĞİŞİKLİK BURADA: Maksimum bütçe dinamik olarak belirlendi ---
+    const maxBudget = formData.listingStatus === 'Kiralık' ? 200000 : 20000000;
+    const budgetStep = formData.listingStatus === 'Kiralık' ? 1000 : 100000;
+
     return (
         <div className="request-form-container">
             <h2>Hayalinizdeki Mülkü Bize Tarif Edin</h2>
@@ -84,7 +100,6 @@ function RequestForm() {
                 </div>
                 <div className="form-section">
                     <h3>Mülk Kriterleriniz</h3>
-                    {/* --- DEĞİŞİKLİK BURADA: Butonlar ve Oda Sayısı aynı grid içine alındı --- */}
                     <div className="form-grid">
                         <div className="form-group">
                             <label>İşlem Türü</label>
@@ -98,7 +113,8 @@ function RequestForm() {
                     <div className="form-group slider-group">
                         <label>Bütçe Aralığınız (₺)</label>
                         <div className="range-labels"><span>{formatPrice(formData.budget[0])} ₺</span><span>{formatPrice(formData.budget[1])} ₺</span></div>
-                        <Slider range min={0} max={20000000} step={100000} value={formData.budget} onChange={value => handleSliderChange('budget', value)} />
+                        {/* --- DEĞİŞİKLİK BURADA: max ve step değerleri dinamik hale geldi --- */}
+                        <Slider range min={0} max={maxBudget} step={budgetStep} value={formData.budget} onChange={value => handleSliderChange('budget', value)} />
                     </div>
                      <div className="form-group slider-group">
                         <label>Metrekare Aralığı</label>
