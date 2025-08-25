@@ -1,34 +1,68 @@
 {
+  "users": [
+    {
+      "id": 1,
+      "name": "Alihan Tellioğlu",
+      "email": "info@armenkul.com",
+      "officeName": "Armenkul Emlak - Merkez Ofis",
+      "city": "Samsun",
+      "phone": "05551234567",
+      "socialInstagram": "https://instagram.com",
+      "socialFacebook": "https://facebook.com",
+      "socialYoutube": "https://youtube.com",
+      "profilePicture": "https://i.pravatar.cc/150?u=1"
+    },
+    {
+      "id": 2,
+      "name": "Ayşe Demir",
+      "email": "ayse@emlak.com",
+      "officeName": "Demir Gayrimenkul",
+      "city": "Ankara",
+      "phone": "05329876543",
+      "socialInstagram": "https://instagram.com",
+      "profilePicture": "https://i.pravatar.cc/150?u=2"
+    },
+    {
+      "id": 3,
+      "name": "Mehmet Yılmaz",
+      "email": "mehmet@emlak.com",
+      "officeName": "Yılmaz Yatırım",
+      "city": "İzmir",
+      "phone": "05412345678",
+      "socialInstagram": "https://instagram.com",
+      "profilePicture": "https://i.pravatar.cc/150?u=3"
+    }
+  ],
   "properties": [
     {
-      "id": 1, "ownerId": "admin", "listingStatus": "Satılık", "propertyType": "Daire", "title": "Denize Sıfır Lüks 3+1 Daire", "price": 7500000, "squareMeters": 150, "brutSquareMeters": 175, "roomCount": "3+1", "floor": 5, "totalFloors": 10, "buildingAge": 2, "heatingType": "Yerden Isıtma", "furnished": true, "ensuiteBathroom": true, "parking": true, "tradeable": false, "deedStatus": "İskan Mevcut", "occupancyStatus": "Boş", "loanAmount": 5000000, "dues": 750, "deposit": 0, "neighborhood": "Denizevleri", "address": "Adnan Menderes Blv.", "ownerName": "Ali Veli", "ownerPhone": "05550001122", "doorCode": "1234", "privateNote": "Anahtar ofiste.", "images": ["https://images.pexels.com/photos/276724/pexels-photo-276724.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"], "location": {"lat": 41.328, "lng": 36.275}
+      "id": 1, "ownerId": 1, "isPublished": true, "city": "Samsun", "listingStatus": "Satılık", "propertyType": "Daire", "title": "Denizevleri'nde Denize Sıfır Lüks 3+1", "price": 7500000, "squareMeters": 150, "roomCount": "3+1", "buildingAge": 2, "neighborhood": "Denizevleri", "images": ["https://images.pexels.com/photos/276724/pexels-photo-276724.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"], "location": {"lat": 41.328, "lng": 36.275}
     },
     {
-      "id": 2, "ownerId": "admin", "listingStatus": "Kiralık", "propertyType": "Daire", "title": "Merkezi Konumda Eşyalı 2+1", "price": 25000, "squareMeters": 95, "brutSquareMeters": 110, "roomCount": "2+1", "floor": 3, "totalFloors": 7, "buildingAge": 8, "heatingType": "Doğalgaz", "furnished": true, "ensuiteBathroom": false, "parking": true, "tradeable": false, "deedStatus": "İskan Mevcut", "occupancyStatus": "Kiracılı", "loanAmount": 0, "dues": 400, "deposit": 25000, "neighborhood": "Mimar Sinan", "address": "İsmet İnönü Blv.", "ownerName": "Ayşe Yılmaz", "ownerPhone": "05551112233", "doorCode": "", "privateNote": "Kiracı ay sonu çıkıyor.", "images": ["https://images.pexels.com/photos/1571458/pexels-photo-1571458.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"], "location": {"lat": 41.333, "lng": 36.282}
+      "id": 2, "ownerId": 1, "isPublished": true, "city": "Samsun", "listingStatus": "Kiralık", "propertyType": "Daire", "title": "Mimar Sinan'da Eşyalı 2+1", "price": 25000, "squareMeters": 95, "roomCount": "2+1", "buildingAge": 8, "neighborhood": "Mimar Sinan", "images": ["https://images.pexels.com/photos/1571458/pexels-photo-1571458.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"], "location": {"lat": 41.333, "lng": 36.282}
     },
     {
-      "id": 3, "ownerId": "admin", "listingStatus": "Satılık", "propertyType": "Villa", "title": "Atakent'te Özel Havuzlu Lüks Villa", "price": 18500000, "squareMeters": 320, "brutSquareMeters": 400, "roomCount": "5+2", "floor": 0, "totalFloors": 2, "buildingAge": 1, "heatingType": "Yerden Isıtma", "furnished": true, "ensuiteBathroom": true, "parking": true, "tradeable": true, "deedStatus": "İskan Mevcut", "occupancyStatus": "Boş", "loanAmount": 10000000, "dues": 1500, "deposit": 0, "neighborhood": "Atakent", "address": "401. Sokak", "ownerName": "Mehmet Kaya", "ownerPhone": "05552223344", "images": ["https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"], "location": {"lat": 41.341, "lng": 36.255}
+      "id": 3, "ownerId": 1, "isPublished": true, "city": "Samsun", "listingStatus": "Satılık", "propertyType": "Villa", "title": "Atakent'te Özel Havuzlu Lüks Villa", "price": 18500000, "squareMeters": 320, "roomCount": "5+2", "buildingAge": 1, "neighborhood": "Atakent", "images": ["https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"], "location": {"lat": 41.341, "lng": 36.255}
     },
     {
-      "id": 4, "ownerId": "admin", "listingStatus": "Kiralık", "propertyType": "Daire", "title": "Yeni Mahalle'de Ara Kat 1+1", "price": 15000, "squareMeters": 65, "brutSquareMeters": 75, "roomCount": "1+1", "floor": 2, "totalFloors": 5, "buildingAge": 12, "heatingType": "Merkezi Sistem", "furnished": false, "ensuiteBathroom": false, "parking": false, "tradeable": false, "deedStatus": "İskan Mevcut", "occupancyStatus": "Boş", "loanAmount": 0, "dues": 300, "deposit": 15000, "neighborhood": "Yeni Mahalle", "address": "Abdullah Gül Blv.", "ownerName": "Fatma Şahin", "ownerPhone": "05553334455", "images": ["https://images.pexels.com/photos/271816/pexels-photo-271816.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"], "location": {"lat": 41.32, "lng": 36.3}
+      "id": 4, "ownerId": 2, "isPublished": true, "city": "Ankara", "listingStatus": "Kiralık", "propertyType": "Daire", "title": "Çankaya'da Ara Kat 1+1", "price": 15000, "squareMeters": 65, "roomCount": "1+1", "buildingAge": 12, "neighborhood": "Yeni Mahalle", "images": ["https://images.pexels.com/photos/271816/pexels-photo-271816.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"], "location": {"lat": 41.32, "lng": 36.3}
     },
     {
-      "id": 5, "ownerId": "admin", "listingStatus": "Satılık", "propertyType": "Arsa", "title": "Taflan'da Yatırımlık İmarlı Arsa", "price": 4200000, "squareMeters": 550, "brutSquareMeters": 550, "roomCount": "Arsa", "floor": 0, "totalFloors": 0, "buildingAge": 0, "heatingType": "Yok", "furnished": false, "ensuiteBathroom": false, "parking": false, "tradeable": true, "deedStatus": "Arsa Payı", "occupancyStatus": "Boş", "loanAmount": 2000000, "dues": 0, "deposit": 0, "neighborhood": "Taflan", "address": "Sahil Yolu Cd.", "ownerName": "Hasan Demir", "ownerPhone": "05554445566", "images": ["https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"], "location": {"lat": 41.41, "lng": 36.19}
-    },
-    {
-      "id": 6, "ownerId": "admin", "listingStatus": "Satılık", "propertyType": "Daire", "title": "Cumhuriyet Mah. Geniş 4+1 Dubleks", "price": 9800000, "squareMeters": 220, "brutSquareMeters": 250, "roomCount": "4+1", "floor": 8, "totalFloors": 8, "buildingAge": 5, "heatingType": "Doğalgaz", "furnished": false, "ensuiteBathroom": true, "parking": true, "tradeable": false, "deedStatus": "İskan Mevcut", "occupancyStatus": "Mülk Sahibi", "loanAmount": 6000000, "dues": 600, "deposit": 0, "neighborhood": "Cumhuriyet", "address": "312. Sokak", "ownerName": "Zeynep Arslan", "ownerPhone": "05555556677", "images": ["https://images.pexels.com/photos/208736/pexels-photo-208736.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"], "location": {"lat": 41.33, "lng": 36.29}
-    },
-    {
-      "id": 7, "ownerId": "admin", "listingStatus": "Kiralık", "propertyType": "Villa", "title": "Müstakil Bahçeli Kiralık Villa", "price": 60000, "squareMeters": 280, "brutSquareMeters": 350, "roomCount": "4+1", "floor": 0, "totalFloors": 1, "buildingAge": 3, "heatingType": "Yerden Isıtma", "furnished": false, "ensuiteBathroom": true, "parking": true, "tradeable": false, "deedStatus": "İskan Mevcut", "occupancyStatus": "Boş", "loanAmount": 0, "dues": 1000, "deposit": 120000, "neighborhood": "Güzelyalı", "address": "Sümbül Sokak", "ownerName": "Can Öztürk", "ownerPhone": "05556667788", "images": ["https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"], "location": {"lat": 41.338, "lng": 36.265}
-    },
-    {
-      "id": 8, "ownerId": "admin", "listingStatus": "Satılık", "propertyType": "Daire", "title": "Balaç'ta Manzaralı Sıfır 2+1", "price": 5500000, "squareMeters": 110, "brutSquareMeters": 130, "roomCount": "2+1", "floor": 7, "totalFloors": 12, "buildingAge": 0, "heatingType": "Merkezi Sistem", "furnished": false, "ensuiteBathroom": true, "parking": true, "tradeable": false, "deedStatus": "İskan Mevcut Değil", "occupancyStatus": "Boş", "loanAmount": 4000000, "dues": 500, "deposit": 0, "neighborhood": "Balaç", "address": "Balaç Cd.", "ownerName": "Emre Doğan", "ownerPhone": "05557778899", "images": ["https://images.pexels.com/photos/164558/pexels-photo-164558.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"], "location": {"lat": 41.35, "lng": 36.23}
-    },
-    {
-      "id": 9, "ownerId": "admin", "listingStatus": "Satılık", "propertyType": "Daire", "title": "İncesu'da Yatırımlık Kiracılı Daire", "price": 3250000, "squareMeters": 85, "brutSquareMeters": 100, "roomCount": "2+1", "floor": 1, "totalFloors": 4, "buildingAge": 15, "heatingType": "Doğalgaz", "furnished": false, "ensuiteBathroom": false, "parking": false, "tradeable": true, "deedStatus": "İskan Mevcut", "occupancyStatus": "Kiracılı", "loanAmount": 2000000, "dues": 150, "deposit": 0, "neighborhood": "İncesu", "address": "Papatya Cd.", "ownerName": "Selin Aydın", "ownerPhone": "05558889900", "images": ["https://images.pexels.com/photos/277667/pexels-photo-277667.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"], "location": {"lat": 41.325, "lng": 36.285}
-    },
-    {
-      "id": 10, "ownerId": "admin", "listingStatus": "Kiralık", "propertyType": "Daire", "title": "Körfez'de Full Eşyalı Stüdyo Daire", "price": 18000, "squareMeters": 50, "brutSquareMeters": 60, "roomCount": "1+0", "floor": 6, "totalFloors": 9, "buildingAge": 6, "heatingType": "Doğalgaz", "furnished": true, "ensuiteBathroom": false, "parking": true, "tradeable": false, "deedStatus": "İskan Mevcut", "occupancyStatus": "Boş", "loanAmount": 0, "dues": 350, "deposit": 18000, "neighborhood": "Körfez", "address": "Atatürk Blv.", "ownerName": "Mert Çelik", "ownerPhone": "05559990011", "images": ["https://images.pexels.com/photos/1571468/pexels-photo-1571468.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"], "location": {"lat": 41.335, "lng": 36.27}
+      "id": 5, "ownerId": 3, "isPublished": true, "city": "İzmir", "listingStatus": "Satılık", "propertyType": "Arsa", "title": "Güzelbahçe'de Yatırımlık İmarlı Arsa", "price": 4200000, "squareMeters": 550, "deedStatus": "Arsa Payı", "roomCount": "Arsa", "buildingAge": 0, "neighborhood": "Taflan", "images": ["https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"], "location": {"lat": 41.41, "lng": 36.19}
     }
+  ],
+  "requests": [
+    {
+      "id": 1724599200000, "status": "Yeni", "name": "Fatma Gündoğdu", "phone": "0533 111 22 33", "listingStatus": "Kiralık", "budget": [22000, 28000], "squareMeters": [90, 110], "roomCount": "2+1", "neighborhood1": "Mimar Sinan", "buildingAge": [0, 10], "publishToPool": true, "agentId": 1, "agentName": "Alihan Tellioğlu", "agentPicture": "https://i.pravatar.cc/150?u=1", "agentPhone": "05551234567", "agentOfficeName": "Armenkul Emlak - Merkez Ofis"
+    },
+    {
+      "id": 1724599000000, "status": "Arandı", "name": "Mustafa Öztürk", "phone": "0544 222 33 44", "listingStatus": "Satılık", "budget": [7000000, 8000000], "squareMeters": [140, 170], "roomCount": "3+1", "neighborhood1": "Denizevleri", "buildingAge": [0, 3], "publishToPool": false, "agentId": 1, "agentName": "Alihan Tellioğlu", "agentPicture": "https://i.pravatar.cc/150?u=1", "agentPhone": "05551234567", "agentOfficeName": "Armenkul Emlak - Merkez Ofis"
+    },
+    {
+      "id": 1724253600000, "status": "Yeni", "name": "Kemal Sunal", "phone": "0532 333 44 55", "listingStatus": "Satılık", "propertyType": "Arsa", "budget": [4000000, 4500000], "squareMeters": [500, 600], "neighborhood1": "Taflan", "deedStatus": "Arsa Payı", "publishToPool": true, "agentId": 2, "agentName": "Ayşe Demir", "agentPicture": "https://i.pravatar.cc/150?u=2", "agentPhone": "05329876543", "agentOfficeName": "Demir Gayrimenkul"
+    }
+  ],
+  "appointments": [
+    { "id": 1, "title": "Fatma Gündoğdu - Sunum", "start": "2025-08-26T14:00:00", "end": "2025-08-26T15:00:00" },
+    { "id": 2, "title": "Mustafa Öztürk - Ofis Görüşmesi", "start": "2025-08-27T11:00:00", "end": "2025-08-27T11:30:00" }
   ]
 }

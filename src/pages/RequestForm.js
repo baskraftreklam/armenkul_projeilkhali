@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Slider from 'rc-slider';
-import { FaInstagram, FaFacebook, FaWhatsapp } from 'react-icons/fa';
+// --- DEĞİŞİKLİK: Onay ikonu eklendi ---
+import { FaCheckCircle } from 'react-icons/fa';
 import 'rc-slider/assets/index.css';
 import './RequestForm.css';
 
@@ -10,7 +11,8 @@ atakumNeighborhoods.sort();
 
 function RequestForm({ onAddRequest }) {
     const navigate = useNavigate();
-    const [isSubmitted, setIsSubmitted] = useState(false);
+    // --- DEĞİŞİKLİK: isSubmitted state'i showSuccess ile değiştirildi ---
+    const [showSuccess, setShowSuccess] = useState(false);
     const [visibleNeighborhoods, setVisibleNeighborhoods] = useState(2);
     const [formData, setFormData] = useState({
         name: '',
@@ -25,22 +27,20 @@ function RequestForm({ onAddRequest }) {
         neighborhood4: '',
         buildingAge: [0, 40],
         floor: [0, 20],
+        publishToPool: true,
     });
 
-    // --- DEĞİŞİKLİK BURADA: Satılık/Kiralık durumuna göre bütçe slider'ını sıfırlamak için useEffect eklendi ---
     useEffect(() => {
         if (formData.listingStatus === 'Kiralık') {
-            // Eğer Kiralık seçilirse, bütçeyi kiralık aralığına çek
             setFormData(prev => ({ ...prev, budget: [0, 50000] }));
         } else {
-            // Eğer Satılık seçilirse, bütçeyi satılık aralığına çek
             setFormData(prev => ({ ...prev, budget: [500000, 10000000] }));
         }
-    }, [formData.listingStatus]); // Bu hook sadece listingStatus değiştiğinde çalışır
+    }, [formData.listingStatus]);
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
+        const { name, value, type, checked } = e.target;
+        setFormData(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
     };
     
     const handleSliderChange = (name, value) => {
@@ -51,109 +51,116 @@ function RequestForm({ onAddRequest }) {
         setFormData(prev => ({ ...prev, listingStatus: status }));
     };
 
+    // --- DEĞİŞİKLİK: handleSubmit fonksiyonu animasyonu gösterecek şekilde güncellendi ---
     const handleSubmit = (e) => {
         e.preventDefault();
         onAddRequest(formData);
-        console.log('Gönderilen Talep Formu:', formData);
-        setIsSubmitted(true);
-        window.scrollTo(0, 0);
+        setShowSuccess(true);
+        
+        // 2.5 saniye sonra animasyonu kaldır ve anasayfaya yönlendir
+        setTimeout(() => {
+            navigate('/');
+        }, 2500);
     };
 
     const formatPrice = (price) => new Intl.NumberFormat('tr-TR').format(price);
-
-    if (isSubmitted) {
-        return (
-            <div className="request-form-container submitted">
-                <h2>Talebiniz Alınmıştır!</h2>
-                <p>Hayalinizdeki mülkü bulmamıza yardımcı olduğunuz için teşekkür ederiz. En kısa sürede sizinle iletişime geçeceğiz.</p>
-                <div className="contact-info">
-                    <h3>Daha Hızlı İletişim İçin</h3>
-                    <p><strong>Adres:</strong> Mimar Sinan, Adnan Menderes Blv. No:55, Atakum/Samsun</p>
-                    <p><strong>Telefon:</strong> 0555 123 45 67</p>
-                    <p><strong>E-posta:</strong> info@armenkul.com</p>
-                    <div className="social-media-icons">
-                        <a href="https://www.instagram.com/alihan.tellioglu/" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
-                        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
-                        <a href="https://wa.me/905551234567" target="_blank" rel="noopener noreferrer"><FaWhatsapp /></a>
-                    </div>
-                </div>
-                <button onClick={() => navigate('/')} className="back-home-btn">Anasayfaya Dön</button>
-            </div>
-        );
-    }
-
-    // --- DEĞİŞİKLİK BURADA: Maksimum bütçe dinamik olarak belirlendi ---
+    
+    // --- DEĞİŞİKLİK: isSubmitted kontrolü kaldırıldı, yerine animasyon eklendi ---
     const maxBudget = formData.listingStatus === 'Kiralık' ? 200000 : 20000000;
     const budgetStep = formData.listingStatus === 'Kiralık' ? 1000 : 100000;
 
     return (
-        <div className="request-form-container">
-            <h2>Hayalinizdeki Mülkü Bize Tarif Edin</h2>
-            <p className="form-subtitle">Ekibimiz, kriterlerinize en uygun portföyleri sizin için bulup en kısa sürede iletişime geçsin.</p>
-            <form onSubmit={handleSubmit} className="portfolio-form">
-                <div className="form-section">
-                    <h3>İletişim Bilgileriniz</h3>
-                    <div className="form-grid">
-                        <div className="form-group"><label>Adınız Soyadınız</label><input type="text" name="name" value={formData.name} onChange={handleChange} required /></div>
-                        <div className="form-group"><label>Telefon Numaranız</label><input type="tel" name="phone" value={formData.phone} onChange={handleChange} required /></div>
-                    </div>
-                </div>
-                <div className="form-section">
-                    <h3>Mülk Kriterleriniz</h3>
-                    <div className="form-grid">
-                        <div className="form-group">
-                            <label>İşlem Türü</label>
-                            <div className="status-toggle-buttons">
-                                <button type="button" className={formData.listingStatus === 'Satılık' ? 'active' : ''} onClick={() => handleStatusClick('Satılık')}>Satılık</button>
-                                <button type="button" className={formData.listingStatus === 'Kiralık' ? 'active' : ''} onClick={() => handleStatusClick('Kiralık')}>Kiralık</button>
-                            </div>
+        <>
+            {showSuccess && (
+                <div className="success-overlay">
+                    <div className="success-box">
+                        <div className="success-checkmark">
+                            <FaCheckCircle />
                         </div>
-                        <div className="form-group"><label>Oda Sayısı</label><select name="roomCount" value={formData.roomCount} onChange={handleChange}><option value="">Farketmez</option><option>1+1</option><option>2+1</option><option>3+1</option><option>4+1 ve üzeri</option></select></div>
-                    </div>
-                    <div className="form-group slider-group">
-                        <label>Bütçe Aralığınız (₺)</label>
-                        <div className="range-labels"><span>{formatPrice(formData.budget[0])} ₺</span><span>{formatPrice(formData.budget[1])} ₺</span></div>
-                        {/* --- DEĞİŞİKLİK BURADA: max ve step değerleri dinamik hale geldi --- */}
-                        <Slider range min={0} max={maxBudget} step={budgetStep} value={formData.budget} onChange={value => handleSliderChange('budget', value)} />
-                    </div>
-                     <div className="form-group slider-group">
-                        <label>Metrekare Aralığı</label>
-                        <div className="range-labels"><span>{formData.squareMeters[0]} m²</span><span>{formData.squareMeters[1] === 350 ? '350+' : `${formData.squareMeters[1]} m²`}</span></div>
-                        <Slider range min={0} max={350} step={10} value={formData.squareMeters} onChange={value => handleSliderChange('squareMeters', value)} />
-                    </div>
-                     <div className="form-group slider-group">
-                        <label>Bina Yaşı Aralığı</label>
-                        <div className="range-labels"><span>Sıfır</span><span>{formData.buildingAge[1] === 40 ? '40+' : `${formData.buildingAge[1]} Yaş`}</span></div>
-                        <Slider range min={0} max={40} value={formData.buildingAge} onChange={value => handleSliderChange('buildingAge', value)} />
-                    </div>
-                    <div className="form-group slider-group">
-                        <label>Tercih Edilen Kat Aralığı</label>
-                        <div className="range-labels"><span>{formData.floor[0] === 0 ? 'Zemin' : `${formData.floor[0]}. Kat`}</span><span>{formData.floor[1] === 20 ? '20+' : `${formData.floor[1]}. Kat`}</span></div>
-                        <Slider range min={0} max={20} value={formData.floor} onChange={value => handleSliderChange('floor', value)} />
+                        <h2>Talebiniz Alınmıştır!</h2>
+                        <p>Anasayfaya yönlendiriliyorsunuz...</p>
                     </div>
                 </div>
-                 <div className="form-section">
-                    <h3>Konum Tercihleriniz</h3>
-                    <div className="form-grid">
-                        <div className="form-group"><label>1. Tercih Mahalle</label><select name="neighborhood1" value={formData.neighborhood1} onChange={handleChange}><option value="">Seçiniz...</option>{atakumNeighborhoods.map(hood => <option key={`n1-${hood}`} value={hood}>{hood}</option>)}</select></div>
-                        <div className="form-group"><label>2. Tercih Mahalle</label><select name="neighborhood2" value={formData.neighborhood2} onChange={handleChange}><option value="">Seçiniz...</option>{atakumNeighborhoods.map(hood => <option key={`n2-${hood}`} value={hood}>{hood}</option>)}</select></div>
-                        {visibleNeighborhoods > 2 && (
-                            <>
-                                <div className="form-group"><label>3. Tercih Mahalle</label><select name="neighborhood3" value={formData.neighborhood3} onChange={handleChange}><option value="">Seçiniz...</option>{atakumNeighborhoods.map(hood => <option key={`n3-${hood}`} value={hood}>{hood}</option>)}</select></div>
-                                <div className="form-group"><label>4. Tercih Mahalle</label><select name="neighborhood4" value={formData.neighborhood4} onChange={handleChange}><option value="">Seçiniz...</option>{atakumNeighborhoods.map(hood => <option key={`n4-${hood}`} value={hood}>{hood}</option>)}</select></div>
-                            </>
+            )}
+
+            <div className="request-form-container">
+                <h2>Müşteri Talep Formu</h2>
+                <p className="form-subtitle">Ekibimiz, kriterlerinize en uygun portföyleri sizin için bulup en kısa sürede iletişime geçsin.</p>
+                <form onSubmit={handleSubmit} className="portfolio-form">
+                    <div className="form-section">
+                        <h3>İletişim Bilgileriniz</h3>
+                        <div className="form-grid">
+                            <div className="form-group"><label>Adınız Soyadınız</label><input type="text" name="name" value={formData.name} onChange={handleChange} required /></div>
+                            <div className="form-group"><label>Telefon Numaranız</label><input type="tel" name="phone" value={formData.phone} onChange={handleChange} required /></div>
+                        </div>
+                    </div>
+                    <div className="form-section">
+                        <h3>Mülk Kriterleriniz</h3>
+                        <div className="form-grid">
+                            <div className="form-group">
+                                <label>İşlem Türü</label>
+                                <div className="status-toggle-buttons">
+                                    <button type="button" className={formData.listingStatus === 'Satılık' ? 'active' : ''} onClick={() => handleStatusClick('Satılık')}>Satılık</button>
+                                    <button type="button" className={formData.listingStatus === 'Kiralık' ? 'active' : ''} onClick={() => handleStatusClick('Kiralık')}>Kiralık</button>
+                                </div>
+                            </div>
+                            <div className="form-group"><label>Oda Sayısı</label><select name="roomCount" value={formData.roomCount} onChange={handleChange}><option value="">Farketmez</option><option>1+1</option><option>2+1</option><option>3+1</option><option>4+1 ve üzeri</option></select></div>
+                        </div>
+                        <div className="form-group slider-group">
+                            <label>Bütçe Aralığınız (₺)</label>
+                            <div className="range-labels"><span>{formatPrice(formData.budget[0])} ₺</span><span>{formatPrice(formData.budget[1])} ₺</span></div>
+                            <Slider range min={0} max={maxBudget} step={budgetStep} value={formData.budget} onChange={value => handleSliderChange('budget', value)} />
+                        </div>
+                        <div className="form-group slider-group">
+                            <label>Metrekare Aralığı</label>
+                            <div className="range-labels"><span>{formData.squareMeters[0]} m²</span><span>{formData.squareMeters[1] === 350 ? '350+' : `${formData.squareMeters[1]} m²`}</span></div>
+                            <Slider range min={0} max={350} step={10} value={formData.squareMeters} onChange={value => handleSliderChange('squareMeters', value)} />
+                        </div>
+                        <div className="form-group slider-group">
+                            <label>Bina Yaşı Aralığı</label>
+                            <div className="range-labels"><span>Sıfır</span><span>{formData.buildingAge[1] === 40 ? '40+' : `${formData.buildingAge[1]} Yaş`}</span></div>
+                            <Slider range min={0} max={40} value={formData.buildingAge} onChange={value => handleSliderChange('buildingAge', value)} />
+                        </div>
+                        <div className="form-group slider-group">
+                            <label>Tercih Edilen Kat Aralığı</label>
+                            <div className="range-labels"><span>{formData.floor[0] === 0 ? 'Zemin' : `${formData.floor[0]}. Kat`}</span><span>{formData.floor[1] === 20 ? '20+' : `${formData.floor[1]}. Kat`}</span></div>
+                            <Slider range min={0} max={20} value={formData.floor} onChange={value => handleSliderChange('floor', value)} />
+                        </div>
+                    </div>
+                    <div className="form-section">
+                        <h3>Konum Tercihleriniz</h3>
+                        <div className="form-grid">
+                            <div className="form-group"><label>1. Tercih Mahalle</label><select name="neighborhood1" value={formData.neighborhood1} onChange={handleChange}><option value="">Seçiniz...</option>{atakumNeighborhoods.map(hood => <option key={`n1-${hood}`} value={hood}>{hood}</option>)}</select></div>
+                            <div className="form-group"><label>2. Tercih Mahalle</label><select name="neighborhood2" value={formData.neighborhood2} onChange={handleChange}><option value="">Seçiniz...</option>{atakumNeighborhoods.map(hood => <option key={`n2-${hood}`} value={hood}>{hood}</option>)}</select></div>
+                            {visibleNeighborhoods > 2 && (
+                                <>
+                                    <div className="form-group"><label>3. Tercih Mahalle</label><select name="neighborhood3" value={formData.neighborhood3} onChange={handleChange}><option value="">Seçiniz...</option>{atakumNeighborhoods.map(hood => <option key={`n3-${hood}`} value={hood}>{hood}</option>)}</select></div>
+                                    <div className="form-group"><label>4. Tercih Mahalle</label><select name="neighborhood4" value={formData.neighborhood4} onChange={handleChange}><option value="">Seçiniz...</option>{atakumNeighborhoods.map(hood => <option key={`n4-${hood}`} value={hood}>{hood}</option>)}</select></div>
+                                </>
+                            )}
+                        </div>
+                        {visibleNeighborhoods < 4 && (
+                            <button type="button" onClick={() => setVisibleNeighborhoods(4)} className="add-more-btn">
+                                Daha Fazla Konum Ekle
+                            </button>
                         )}
                     </div>
-                    {visibleNeighborhoods < 4 && (
-                        <button type="button" onClick={() => setVisibleNeighborhoods(4)} className="add-more-btn">
-                            Daha Fazla Konum Ekle
-                        </button>
-                    )}
-                </div>
-                
-                <button type="submit" className="submit-btn">Talebimi Gönder</button>
-            </form>
-        </div>
+                    
+                    <div className="form-section">
+                        <h3>Yayın Ayarları</h3>
+                        <div className="form-group-checkbox">
+                            <input type="checkbox" id="publishToPool" name="publishToPool" checked={formData.publishToPool} onChange={handleChange} />
+                            <label htmlFor="publishToPool">
+                                Talep havuzunda yayınlansın
+                                <span className="checkbox-help-text">(Bu ayar açıkken tüm şehir bu talebi görüntüleyebilir)</span>
+                            </label>
+                        </div>
+                    </div>
+    
+                    <button type="submit" className="submit-btn">Talebi Ekle</button>
+                </form>
+            </div>
+        </>
     );
 }
 

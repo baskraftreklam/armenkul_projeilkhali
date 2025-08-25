@@ -9,21 +9,20 @@
 .back-home-btn { padding: 12px 25px; background-color: var(--primary-color); color: white; border: none; border-radius: 5px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: background-color 0.3s ease; }
 .back-home-btn:hover { background-color: var(--primary-hover-color); }
 
-/* --- DEĞİŞİKLİK BURADA: Buton stilleri güncellendi --- */
+/* --- DEĞİŞİKLİK: Butonların yüksekliği düzeltildi --- */
 .status-toggle-buttons {
     display: flex;
-    height: 100%;
 }
 .status-toggle-buttons button {
     flex: 1;
-    padding: 8px 12px; /* Daha küçük butonlar için padding azaltıldı */
+    padding: 12px; /* Diğer inputlarla aynı hizada olması için padding artırıldı */
     border: 1px solid var(--border-color);
     background-color: transparent;
     color: var(--text-secondary-color);
     cursor: pointer;
     transition: all 0.2s ease-in-out;
     font-weight: 500;
-    font-size: 0.9rem; /* Yazı boyutu küçültüldü */
+    font-size: 0.9rem;
 }
 .status-toggle-buttons button:first-of-type {
     border-top-left-radius: 5px;
@@ -48,3 +47,170 @@
 .social-media-icons { margin-top: 20px; display: flex; justify-content: center; gap: 25px; }
 .social-media-icons a { color: var(--text-color); font-size: 2rem; transition: color 0.2s ease, transform 0.2s ease; }
 .social-media-icons a:hover { color: var(--primary-color); transform: scale(1.1); }
+
+.form-group-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.form-group-checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary-color);
+}
+.form-group-checkbox label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.checkbox-help-text {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--primary-color);
+  opacity: 0.9;
+}
+
+/* --- YENİ EKLENEN ANİMASYON STİLLERİ --- */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+@keyframes scaleUp { from { transform: scale(0.7); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+.success-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.success-box {
+  background: var(--card-bg);
+  padding: 40px;
+  border-radius: 10px;
+  text-align: center;
+  border: 1px solid var(--border-color);
+  animation: scaleUp 0.4s ease-out forwards;
+}
+
+.success-checkmark {
+  font-size: 5rem;
+  color: #28a745; /* Yeşil renk */
+  line-height: 1;
+  margin-bottom: 15px;
+}
+
+/* ... dosyanın geri kalanı aynı ... */
+.request-form-container { padding: 30px; max-width: 900px; margin: 20px auto; background: var(--card-bg); border: 1px solid var(--border-color); box-shadow: var(--box-shadow); border-radius: 10px; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.request-form-container h2 { text-align: center; margin-bottom: 10px; color: var(--primary-color); }
+.form-subtitle { text-align: center; margin-top: 0; margin-bottom: 30px; color: var(--text-secondary-color); }
+.slider-group { grid-column: 1 / -1; margin-top: 15px; }
+.range-labels { display: flex; justify-content: space-between; font-size: 0.9rem; color: var(--text-secondary-color); margin-bottom: 10px; }
+.request-form-container.submitted { text-align: center; }
+.contact-info { margin: 30px 0; padding: 20px; background-color: rgba(0,0,0,0.1); border: 1px solid var(--border-color); border-radius: 8px; }
+.contact-info h3 { margin-top: 0; color: var(--primary-color); }
+.back-home-btn { padding: 12px 25px; background-color: var(--primary-color); color: white; border: none; border-radius: 5px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: background-color 0.3s ease; }
+.back-home-btn:hover { background-color: var(--primary-hover-color); }
+.status-toggle-buttons {
+    display: flex;
+}
+.status-toggle-buttons button {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    background-color: transparent;
+    color: var(--text-secondary-color);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+.status-toggle-buttons button:first-of-type {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.status-toggle-buttons button:last-of-type {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.status-toggle-buttons button:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+.status-toggle-buttons button.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+.add-more-btn { width: 100%; text-align: center; margin-top: 15px; padding: 10px; background: none; border: 1px dashed var(--border-color); color: var(--text-secondary-color); cursor: pointer; border-radius: 5px; transition: all 0.2s ease; }
+.add-more-btn:hover { border-color: var(--primary-color); color: var(--primary-color); }
+.social-media-icons { margin-top: 20px; display: flex; justify-content: center; gap: 25px; }
+.social-media-icons a { color: var(--text-color); font-size: 2rem; transition: color 0.2s ease, transform 0.2s ease; }
+.social-media-icons a:hover { color: var(--primary-color); transform: scale(1.1); }
+.form-group-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.form-group-checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary-color);
+}
+.form-group-checkbox label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.checkbox-help-text {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--primary-color);
+  opacity: 0.9;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+@keyframes scaleUp { from { transform: scale(0.7); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.success-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease-out forwards;
+}
+.success-box {
+  background: var(--card-bg);
+  padding: 40px;
+  border-radius: 10px;
+  text-align: center;
+  border: 1px solid var(--border-color);
+  animation: scaleUp 0.4s ease-out forwards;
+}
+.success-box h2 {
+  color: var(--text-color);
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+.success-box p {
+  color: var(--text-secondary-color);
+  margin: 0;
+}

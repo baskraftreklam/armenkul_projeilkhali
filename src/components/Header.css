@@ -1,19 +1,12 @@
 .header { position: sticky; top: 0; z-index: 1000; padding: 10px 0; background: var(--header-bg); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); transition: padding 0.3s ease-in-out; }
 .header.scrolled { padding: 5px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-bottom: 1px solid var(--border-color); }
 .header-container { display: flex; justify-content: space-between; align-items: center; }
-.header-container nav { display: flex; align-items: center; gap: 15px; }
+
+.header-right-nav { display: flex; align-items: center; gap: 15px; }
+
 .logo-link { text-decoration: none; display: flex; align-items: center; }
 .logo-image { height: 50px; width: auto; transition: height 0.3s ease-in-out; }
 .header.scrolled .logo-image { height: 40px; }
-.nav-link { text-decoration: none; color: var(--text-color); font-weight: 500; transition: color 0.3s ease; padding: 10px 15px; border-radius: 5px; }
-.nav-link:hover { color: var(--primary-color); }
-.nav-link-button { padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: 500; transition: background-color 0.3s ease; display: inline-block; }
-.nav-link-button.talep-button { background-color: rgba(255, 0, 0, 0.2); border: 1px solid var(--primary-color); color: white; }
-.nav-link-button.talep-button:hover { background-color: var(--primary-color); color: white; }
-.nav-link-button { background-color: var(--primary-color); color: white; }
-.nav-link-button:hover { background-color: var(--primary-hover-color); }
-
-.nav-user-section, .nav-guest-section { display: flex; align-items: center; gap: 15px; }
 
 .profile-icon-link { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; overflow: hidden; border: 2px solid var(--primary-color); }
 .profile-icon-image { width: 100%; height: 100%; object-fit: cover; }
@@ -21,13 +14,83 @@
 
 .admin-menu-container { position: relative; }
 .menu-toggle-button { background: var(--primary-color); color: white; border: none; border-radius: 5px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.2rem; }
-.dropdown-menu { position: absolute; top: 50px; right: 0; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; box-shadow: var(--box-shadow); z-index: 1100; width: 200px; overflow: hidden; display: flex; flex-direction: column; }
-.dropdown-link { padding: 12px 15px; text-decoration: none; color: var(--text-color); font-weight: 500; display: block; background: none; border: none; width: 100%; text-align: left; cursor: pointer; }
-.dropdown-link:hover { background-color: var(--primary-color); color: white; }
+
+/* --- DEĞİŞİKLİK 1: ANİMASYON EKLENDİ --- */
+@keyframes slideDownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: var(--box-shadow);
+  z-index: 1100;
+  width: 220px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  /* Animasyonu uygula */
+  animation: slideDownFadeIn 0.3s ease-out forwards;
+}
+/* --- DEĞİŞİKLİK 1 SONU --- */
+
+
+.dropdown-link {
+  padding: 12px 20px;
+  margin: 4px 5px;
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: none;
+  border: none;
+  width: calc(100% - 10px);
+  text-align: left;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.dropdown-link:hover {
+  background-color: var(--primary-color);
+  color: white;
+  transform: translateX(-5px);
+}
+
+.dropdown-link.dropdown-link-primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.dropdown-link.dropdown-link-primary:hover {
+  background-color: var(--primary-hover-color);
+  transform: translateX(0);
+}
+
 .dropdown-link.logout { color: var(--primary-color); }
 .dropdown-link.logout:hover { background-color: var(--primary-color); color: white; }
 
+.dropdown-divider {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 5px 15px;
+}
+
 @media (max-width: 768px) {
   .header-container { flex-direction: row; }
-  .header-container nav { gap: 10px; }
+  .header-right-nav { gap: 10px; }
 }

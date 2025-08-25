@@ -3,20 +3,11 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  const [users, setUsers] = useState(() => {
-    const savedUsers = localStorage.getItem('users');
-    return savedUsers ? JSON.parse(savedUsers) : [];
-  });
-
   const [currentUser, setCurrentUser] = useState(() => {
-    const savedUser = sessionStorage.getItem('currentUser');
-    return savedUser ? JSON.parse(savedUser) : null;
+    const storedUser = sessionStorage.getItem('currentUser');
+    return storedUser ? JSON.parse(storedUser) : null;
   });
 
-  useEffect(() => {
-    localStorage.setItem('users', JSON.stringify(users));
-  }, [users]);
-  
   useEffect(() => {
     if (currentUser) {
       sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
@@ -25,32 +16,26 @@ export const AuthProvider = ({ children }) => {
     }
   }, [currentUser]);
 
-  const signup = (userData) => {
-    const userExists = users.find(user => user.email === userData.email);
-    if (userExists) {
-      alert('Bu e-posta adresi zaten kayıtlı.');
-      return false;
-    }
-    // Dosya nesnesini localStorage'a kaydetmemek için siliyoruz.
-    const { profilePictureFile, ...submissionData } = userData;
-    
-    const newUser = { id: Date.now(), ...submissionData };
-    setUsers(prevUsers => [...prevUsers, newUser]);
-    setCurrentUser(newUser);
-    return true;
-  };
-
-  const login = (email, password) => {
-    if (email === 'admin' && password === 'bas5561') {
-        const adminUser = { id: 'admin', name: 'Admin', email: 'admin', city: 'Samsun' };
-        setCurrentUser(adminUser);
-        return true;
-    }
-    const user = users.find(u => u.email === email && u.password === password);
-    if (user) {
-      setCurrentUser(user);
+  const login = (username, password) => {
+    if (username === 'admin' && password === 'bas5561') {
+      // --- ANA KULLANICI PROFİLİ TEST VERİLERİYLE DOLDURULDU ---
+      const userData = {
+        id: 1,
+        name: 'Alihan Tellioğlu',
+        email: 'info@armenkul.com',
+        officeName: 'Armenkul Emlak - Merkez Ofis',
+        city: 'Samsun',
+        phone: '0555 123 45 67',
+        socialInstagram: 'https://www.instagram.com/alihan.tellioglu/',
+        socialFacebook: 'https://facebook.com',
+        socialYoutube: 'https://youtube.com',
+        profilePicture: 'https://i.pravatar.cc/150?u=1',
+      };
+      setCurrentUser(userData);
       return true;
     }
+    // Test için ikinci bir kullanıcı da ekleyebilirsiniz.
+    // if (username === 'test' && password === 'test') { ... }
     return false;
   };
 
@@ -58,30 +43,38 @@ export const AuthProvider = ({ children }) => {
     setCurrentUser(null);
   };
 
-  const deleteAccount = (userId) => {
-    setUsers(prevUsers => prevUsers.filter(user => user.id !== userId));
-    logout();
-  };
-
   const updateUser = (userId, updatedData) => {
-      const { profilePictureFile, ...submissionData } = updatedData;
-      const updatedUsers = users.map(user => 
-          user.id === userId ? { ...user, ...submissionData } : user
-      );
-      setUsers(updatedUsers);
-      if (currentUser && currentUser.id === userId) {
-          setCurrentUser(prev => ({ ...prev, ...submissionData }));
-      }
+    if (currentUser && currentUser.id === userId) {
+      setCurrentUser(prevUser => ({
+        ...prevUser,
+        ...updatedData
+      }));
+    }
+  };
+  
+  const deleteAccount = (userId) => {
+    console.log(`Kullanıcı ${userId} silindi.`);
+    setCurrentUser(null);
   };
 
-  const value = { 
+  const signup = (userData) => {
+    console.log("Yeni kullanıcı kaydı:", userData);
+    const newUser = {
+      id: Date.now(),
+      ...userData
+    };
+    setCurrentUser(newUser);
+    return true;
+  };
+
+  const value = {
     currentUser,
-    isAdmin: currentUser ? true : false,
-    signup,
+    isAdmin: !!currentUser,
     login,
     logout,
-    deleteAccount,
     updateUser,
+    deleteAccount,
+    signup
   };
 
   return (

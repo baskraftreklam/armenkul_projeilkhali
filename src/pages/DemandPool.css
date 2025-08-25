@@ -1,4 +1,4 @@
-.request-list-container {
+.demand-pool-container {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -40,16 +40,13 @@
   font-size: 0.8rem;
   font-weight: bold;
   color: white;
-  border: none;
-  background-color: transparent; /* Select görünümü için */
 }
 
-/* Select menüsü için özel renkler */
-.status-badge.status-yeni { background-color: #0d6efd; }
-.status-badge.status-arandı { background-color: #ffc107; color: black !important; }
-.status-badge.status-randevu-oluşturuldu { background-color: #0dcaf0; }
-.status-badge.status-sonuçlandı { background-color: #198754; }
-.status-badge.status-iptal { background-color: #6c757d; }
+.status-yeni { background-color: #0d6efd; }
+.status-arandı { background-color: #ffc107; color: black !important; }
+.status-randevu-oluşturuldu { background-color: #0dcaf0; }
+.status-sonuçlandı { background-color: #198754; }
+.status-iptal { background-color: #6c757d; }
 
 
 .request-details-grid {
@@ -92,6 +89,10 @@
   color: var(--primary-color);
 }
 
+.match-count.other-matches {
+  color: var(--text-secondary-color);
+}
+
 .view-matches-btn {
   background: var(--primary-color);
   color: white;
@@ -114,7 +115,7 @@
 }
 
 .matches-container.expanded {
-  max-height: 1000px; 
+  max-height: 1000px; /* Yeterince büyük bir değer */
   padding-top: 20px;
 }
 
@@ -130,4 +131,77 @@
     background: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: 10px;
+}
+
+.agent-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.agent-picture {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border-color);
+}
+
+.agent-name {
+  margin: 0 !important;
+  font-size: 1.1rem !important;
+  color: var(--text-color) !important;
+}
+
+.agent-contact-info {
+  display: flex;
+  gap: 15px;
+  font-size: 0.8rem;
+  color: var(--text-secondary-color);
+  margin-top: 4px;
+}
+
+.agent-contact-info span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.listing-status-badge {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 5px 12px;
+  border-radius: 5px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.request-details-grid.extended {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid var(--border-color);
+}
+
+/* --- DEĞİŞİKLİK: Bu kural artık gereksiz olduğu için silindi --- */
+/*
+.request-detail-item.wide {
+  grid-column: 1 / -1;
+}
+*/
+
+.request-detail-item span {
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.demand-group {
+  margin-bottom: 20px;
+}
+
+.demand-group-title {
+  color: var(--text-secondary-color);
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 10px;
 }
