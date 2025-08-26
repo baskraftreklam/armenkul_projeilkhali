@@ -1,11 +1,21 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
+// Simülasyon için kullanıcı verilerini import ediyoruz
+import mockData from '../data/db.json';
 
 const AuthContext = createContext(null);
 
+// Gerçek bir backend olmadığından, kullanıcıları buradan alıyoruz.
+const users = mockData.users;
+
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(() => {
-    const storedUser = sessionStorage.getItem('currentUser');
-    return storedUser ? JSON.parse(storedUser) : null;
+    try {
+      const storedUser = sessionStorage.getItem('currentUser');
+      return storedUser ? JSON.parse(storedUser) : null;
+    } catch (error) {
+      console.error("Error parsing stored user:", error);
+      return null;
+    }
   });
 
   useEffect(() => {
@@ -16,39 +26,29 @@ export const AuthProvider = ({ children }) => {
     }
   }, [currentUser]);
 
-  const login = (username, password) => {
-    if (username === 'admin' && password === 'bas5561') {
-      // --- ANA KULLANICI PROFİLİ TEST VERİLERİYLE DOLDURULDU ---
-      const userData = {
-        id: 1,
-        name: 'Alihan Tellioğlu',
-        email: 'info@armenkul.com',
-        officeName: 'Armenkul Emlak - Merkez Ofis',
-        city: 'Samsun',
-        phone: '0555 123 45 67',
-        socialInstagram: 'https://www.instagram.com/alihan.tellioglu/',
-        socialFacebook: 'https://facebook.com',
-        socialYoutube: 'https://youtube.com',
-        profilePicture: 'https://i.pravatar.cc/150?u=1',
-      };
-      setCurrentUser(userData);
-      return true;
+  // --- GİRİŞ MANTIĞI EKLENDİ ---
+  const login = (email, password) => {
+    // Kullanıcıyı e-posta adresine göre bul
+    const user = users.find(u => u.email === email);
+    
+    // Şimdilik şifre kontrolü yapmıyoruz, sadece e-posta yeterli.
+    // Gerçek bir uygulamada burada şifre de kontrol edilmelidir.
+    if (user) {
+      setCurrentUser(user);
+      return true; // Giriş başarılı
     }
-    // Test için ikinci bir kullanıcı da ekleyebilirsiniz.
-    // if (username === 'test' && password === 'test') { ... }
-    return false;
+    
+    return false; // Kullanıcı bulunamadı, giriş başarısız
   };
 
   const logout = () => {
     setCurrentUser(null);
   };
-
-  const updateUser = (userId, updatedData) => {
-    if (currentUser && currentUser.id === userId) {
-      setCurrentUser(prevUser => ({
-        ...prevUser,
-        ...updatedData
-      }));
+  
+  const updateUser = (updatedData) => {
+    if (currentUser) {
+        const newUser = { ...currentUser, ...updatedData };
+        setCurrentUser(newUser);
     }
   };
   
@@ -58,18 +58,16 @@ export const AuthProvider = ({ children }) => {
   };
 
   const signup = (userData) => {
-    console.log("Yeni kullanıcı kaydı:", userData);
-    const newUser = {
-      id: Date.now(),
-      ...userData
-    };
-    setCurrentUser(newUser);
+    // Bu simülasyonda yeni kayıtlı kullanıcıyı state'e eklemiyoruz,
+    // sadece login/logout döngüsünü simüle ediyoruz.
+    console.log("New user signed up:", userData);
     return true;
   };
 
   const value = {
     currentUser,
-    isAdmin: !!currentUser,
+    // --- DEĞİŞİKLİK: isAdmin yerine daha esnek rol kontrolü ---
+    isAdmin: currentUser ? (currentUser.role === 'admin' || currentUser.role === 'superadmin') : false,
     login,
     logout,
     updateUser,

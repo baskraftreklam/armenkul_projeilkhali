@@ -10,7 +10,13 @@
       "socialInstagram": "https://instagram.com",
       "socialFacebook": "https://facebook.com",
       "socialYoutube": "https://youtube.com",
-      "profilePicture": "https://i.pravatar.cc/150?u=1"
+      "profilePicture": "https://i.pravatar.cc/150?u=1",
+      "role": "superadmin",
+      "subscription": {
+        "plan": "Yıllık Pro",
+        "status": "active",
+        "endDate": "2026-08-25T23:59:59"
+      }
     },
     {
       "id": 2,
@@ -20,7 +26,13 @@
       "city": "Ankara",
       "phone": "05329876543",
       "socialInstagram": "https://instagram.com",
-      "profilePicture": "https://i.pravatar.cc/150?u=2"
+      "profilePicture": "https://i.pravatar.cc/150?u=2",
+      "role": "agent",
+      "subscription": {
+        "plan": "3 Aylık",
+        "status": "active",
+        "endDate": "2025-11-20T23:59:59"
+      }
     },
     {
       "id": 3,
@@ -30,39 +42,22 @@
       "city": "İzmir",
       "phone": "05412345678",
       "socialInstagram": "https://instagram.com",
-      "profilePicture": "https://i.pravatar.cc/150?u=3"
+      "profilePicture": "https://i.pravatar.cc/150?u=3",
+      "role": "agent",
+      "subscription": {
+        "plan": "Aylık",
+        "status": "expired",
+        "endDate": "2025-08-15T23:59:59"
+      }
     }
   ],
   "properties": [
-    {
-      "id": 1, "ownerId": 1, "isPublished": true, "city": "Samsun", "listingStatus": "Satılık", "propertyType": "Daire", "title": "Denizevleri'nde Denize Sıfır Lüks 3+1", "price": 7500000, "squareMeters": 150, "roomCount": "3+1", "buildingAge": 2, "neighborhood": "Denizevleri", "images": ["https://images.pexels.com/photos/276724/pexels-photo-276724.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"], "location": {"lat": 41.328, "lng": 36.275}
-    },
-    {
-      "id": 2, "ownerId": 1, "isPublished": true, "city": "Samsun", "listingStatus": "Kiralık", "propertyType": "Daire", "title": "Mimar Sinan'da Eşyalı 2+1", "price": 25000, "squareMeters": 95, "roomCount": "2+1", "buildingAge": 8, "neighborhood": "Mimar Sinan", "images": ["https://images.pexels.com/photos/1571458/pexels-photo-1571458.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"], "location": {"lat": 41.333, "lng": 36.282}
-    },
-    {
-      "id": 3, "ownerId": 1, "isPublished": true, "city": "Samsun", "listingStatus": "Satılık", "propertyType": "Villa", "title": "Atakent'te Özel Havuzlu Lüks Villa", "price": 18500000, "squareMeters": 320, "roomCount": "5+2", "buildingAge": 1, "neighborhood": "Atakent", "images": ["https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"], "location": {"lat": 41.341, "lng": 36.255}
-    },
-    {
-      "id": 4, "ownerId": 2, "isPublished": true, "city": "Ankara", "listingStatus": "Kiralık", "propertyType": "Daire", "title": "Çankaya'da Ara Kat 1+1", "price": 15000, "squareMeters": 65, "roomCount": "1+1", "buildingAge": 12, "neighborhood": "Yeni Mahalle", "images": ["https://images.pexels.com/photos/271816/pexels-photo-271816.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"], "location": {"lat": 41.32, "lng": 36.3}
-    },
-    {
-      "id": 5, "ownerId": 3, "isPublished": true, "city": "İzmir", "listingStatus": "Satılık", "propertyType": "Arsa", "title": "Güzelbahçe'de Yatırımlık İmarlı Arsa", "price": 4200000, "squareMeters": 550, "deedStatus": "Arsa Payı", "roomCount": "Arsa", "buildingAge": 0, "neighborhood": "Taflan", "images": ["https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"], "location": {"lat": 41.41, "lng": 36.19}
-    }
+    { "id": 1, "ownerId": 1, "isPublished": true, "city": "Samsun", "listingStatus": "Satılık", "propertyType": "Daire", "title": "Denizevleri'nde Denize Sıfır Lüks 3+1", "price": 7500000, "squareMeters": 150, "roomCount": "3+1", "buildingAge": 2, "neighborhood": "Denizevleri", "images": ["https://images.pexels.com/photos/276724/pexels-photo-276724.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"], "location": {"lat": 41.328, "lng": 36.275} },
+    { "id": 2, "ownerId": 1, "isPublished": true, "city": "Samsun", "listingStatus": "Kiralık", "propertyType": "Daire", "title": "Mimar Sinan'da Eşyalı 2+1", "price": 25000, "squareMeters": 95, "roomCount": "2+1", "buildingAge": 8, "neighborhood": "Mimar Sinan", "images": ["https://images.pexels.com/photos/1571458/pexels-photo-1571458.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"], "location": {"lat": 41.333, "lng": 36.282} },
+    { "id": 3, "ownerId": 1, "isPublished": true, "city": "Samsun", "listingStatus": "Satılık", "propertyType": "Villa", "title": "Atakent'te Özel Havuzlu Lüks Villa", "price": 18500000, "squareMeters": 320, "roomCount": "5+2", "buildingAge": 1, "neighborhood": "Atakent", "images": ["https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"], "location": {"lat": 41.341, "lng": 36.255} }
   ],
   "requests": [
-    {
-      "id": 1724599200000, "status": "Yeni", "name": "Fatma Gündoğdu", "phone": "0533 111 22 33", "listingStatus": "Kiralık", "budget": [22000, 28000], "squareMeters": [90, 110], "roomCount": "2+1", "neighborhood1": "Mimar Sinan", "buildingAge": [0, 10], "publishToPool": true, "agentId": 1, "agentName": "Alihan Tellioğlu", "agentPicture": "https://i.pravatar.cc/150?u=1", "agentPhone": "05551234567", "agentOfficeName": "Armenkul Emlak - Merkez Ofis"
-    },
-    {
-      "id": 1724599000000, "status": "Arandı", "name": "Mustafa Öztürk", "phone": "0544 222 33 44", "listingStatus": "Satılık", "budget": [7000000, 8000000], "squareMeters": [140, 170], "roomCount": "3+1", "neighborhood1": "Denizevleri", "buildingAge": [0, 3], "publishToPool": false, "agentId": 1, "agentName": "Alihan Tellioğlu", "agentPicture": "https://i.pravatar.cc/150?u=1", "agentPhone": "05551234567", "agentOfficeName": "Armenkul Emlak - Merkez Ofis"
-    },
-    {
-      "id": 1724253600000, "status": "Yeni", "name": "Kemal Sunal", "phone": "0532 333 44 55", "listingStatus": "Satılık", "propertyType": "Arsa", "budget": [4000000, 4500000], "squareMeters": [500, 600], "neighborhood1": "Taflan", "deedStatus": "Arsa Payı", "publishToPool": true, "agentId": 2, "agentName": "Ayşe Demir", "agentPicture": "https://i.pravatar.cc/150?u=2", "agentPhone": "05329876543", "agentOfficeName": "Demir Gayrimenkul"
-    }
+    { "id": 1724599200000, "status": "Yeni", "name": "Fatma Gündoğdu", "phone": "0533 111 22 33", "listingStatus": "Kiralık", "budget": [22000, 28000], "squareMeters": [90, 110], "roomCount": "2+1", "neighborhood1": "Mimar Sinan", "buildingAge": [0, 10], "publishToPool": true, "agentId": 1, "agentName": "Alihan Tellioğlu", "agentPicture": "https://i.pravatar.cc/150?u=1", "agentPhone": "05551234567", "agentOfficeName": "Armenkul Emlak - Merkez Ofis" }
   ],
-  "appointments": [
-    { "id": 1, "title": "Fatma Gündoğdu - Sunum", "start": "2025-08-26T14:00:00", "end": "2025-08-26T15:00:00" },
-    { "id": 2, "title": "Mustafa Öztürk - Ofis Görüşmesi", "start": "2025-08-27T11:00:00", "end": "2025-08-27T11:30:00" }
-  ]
+  "appointments": []
 }
